@@ -7,6 +7,10 @@ namespace Moderate
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            //NumberSwapper.SwapNumbers();
+            WordFrequencies.CalculateNumberOfOccurencesOfAWordInBook();
         }
+
+
     }
 }
