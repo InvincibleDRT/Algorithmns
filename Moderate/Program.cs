@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Moderate.Classes;
+using System;
 
 namespace Moderate
 {
@@ -8,7 +9,8 @@ namespace Moderate
         {
             Console.WriteLine("Hello World!");
             //NumberSwapper.SwapNumbers();
-            WordFrequencies.CalculateNumberOfOccurencesOfAWordInBook();
+            //WordFrequencies.CalculateNumberOfOccurencesOfAWordInBook();
+            InterSectionOfLines.GetInserction();
         }
 
 
