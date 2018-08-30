@@ -9,9 +9,13 @@ namespace Moderate.Classes
     {
         public static Point GetInserction()
         {
-            LineSegment line1 = new LineSegment(new Point(1, 2), new Point(4, 4));
+            Console.WriteLine("             FirstLine             ");
 
-            LineSegment line2 = new LineSegment(new Point(0,0), new Point(10, 0));
+            LineSegment line1 = CreateLine();
+
+            Console.WriteLine("             SecondLIne            ");
+
+            LineSegment line2 =CreateLine();
             if (line1.Slope == line2.Slope)
             {
                 Console.WriteLine("Lines are Parallel. There is no intersection point");
@@ -32,6 +36,23 @@ namespace Moderate.Classes
                 Console.ReadLine();
                 return new Point(xCorr, yCorr);
             }
+        }
+
+        private static LineSegment CreateLine()
+        {
+            Console.WriteLine("Enter a starting Point");
+            var p1 = CreatePoint();
+            Console.WriteLine("Enter an EndingPoint");            
+            var p2 = CreatePoint();
+            return new LineSegment(p1,p2);
+        }
+
+
+        private static Point CreatePoint()
+        {
+            Console.WriteLine("Enter a Point (Ordinates Seperated by Comma e.g. 1,2 )");
+            var p = Console.ReadLine();
+            return new Point(int.Parse(p.Split(',')[0].Trim()), int.Parse(p.Split(',')[1].Trim()));
         }
     }
 }
