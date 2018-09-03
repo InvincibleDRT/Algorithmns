@@ -11,7 +11,8 @@ namespace Moderate
             //NumberSwapper.SwapNumbers();
             //WordFrequencies.CalculateNumberOfOccurencesOfAWordInBook();
             //InterSectionOfLines.GetInserction();
-            TrailingZeros.NumberOfTrailingZerosInFactorial();
+            //TrailingZeros.NumberOfTrailingZerosInFactorial();
+            SmallestDifference.SmallestDifferenceBetweenArrays();
         }
 
 
