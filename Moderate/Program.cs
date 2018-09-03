@@ -10,7 +10,8 @@ namespace Moderate
             Console.WriteLine("Hello World!");
             //NumberSwapper.SwapNumbers();
             //WordFrequencies.CalculateNumberOfOccurencesOfAWordInBook();
-            InterSectionOfLines.GetInserction();
+            //InterSectionOfLines.GetInserction();
+            TrailingZeros.NumberOfTrailingZerosInFactorial();
         }
 
 
