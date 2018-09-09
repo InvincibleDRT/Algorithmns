@@ -46,7 +46,13 @@ namespace Moderate.Extensions
             {
                 int i = number / (int)Math.Pow(10,loop);
                 number = number% (int)Math.Pow(10, loop);
+
                 returnString += GetString(i, loop);
+                if (number < 20 && number > 10)
+                {
+                    returnString += " "+NumberBetweenTenAndTwenty(number) + GetSingleStringCap(indicator);
+                    return returnString;
+                }
                 loop--;
             }
             return returnString + GetSingleString(number) + GetSingleStringCap(indicator);
@@ -109,6 +115,32 @@ namespace Moderate.Extensions
                     return " Nine";
                 default:
                     return " ";
+            }
+        }
+        private static string NumberBetweenTenAndTwenty(int number)
+        {
+            switch (number)
+            {
+                case 11:
+                    return "Eleven";
+                case 12:
+                    return "Twelve";
+                case 13:
+                    return "Thirteen";
+                case 14:
+                    return "Fourteen";
+                case 15:
+                    return "Fifteen";
+                case 16:
+                    return "Sixteen";
+                case 17:
+                    return "Seventeen";
+                case 18:
+                    return "Eighteen";
+                case 19:
+                    return "Ninteen";
+                default:
+                    return "";
             }
         }
     }
