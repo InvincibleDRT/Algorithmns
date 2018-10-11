@@ -12,6 +12,10 @@ namespace Moderate
             //WordFrequencies.CalculateNumberOfOccurencesOfAWordInBook();
             //InterSectionOfLines.GetInserction();
             //TrailingZeros.NumberOfTrailingZerosInFactorial();
+            //SmallestDifference.SmallestDifferenceBetweenArrays();
+            NumberToString.ConvertToString();
+            Console.Read();
+
         }
 
 
