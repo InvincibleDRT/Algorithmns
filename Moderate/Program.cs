@@ -14,7 +14,7 @@ namespace Moderate
             //TrailingZeros.NumberOfTrailingZerosInFactorial();
             //SmallestDifference.SmallestDifferenceBetweenArrays();
             // NumberToString.ConvertToString();
-            var combos= Leet18.FourSum(new int[]{0,0,0,0},0);
+            var combos= Leet20.IsValid("([]{})");
             Console.Read();
 
         }

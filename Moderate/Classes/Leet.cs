@@ -275,12 +275,12 @@ namespace Leet
         {
             Array.Sort(nums);
             var returnVal = new List<IList<int>>();
-            if(nums.Length<3)
-            return returnVal;
+            if (nums.Length < 3)
+                return returnVal;
             int returnval = nums[1] + nums[2] + nums[0];
             for (int i = 0; i < nums.Length; i++)
             {
-                if(i >0 &&nums[i] == nums[i-1])
+                if (i > 0 && nums[i] == nums[i - 1])
                     continue;
                 int front = i + 1, back = nums.Length - 1;
                 int sumClose = nums[1] + nums[2] + nums[0];
@@ -289,14 +289,14 @@ namespace Leet
                 {
                     var fb = nums[i] + nums[front] + nums[back];
                     if (target == fb)
-                         {
-                             returnVal.Add(new List<int>{nums[i] , nums[front] , nums[back]}.OrderBy(x=>x).ToList());
-                             front++; 
-                             
-                             while(front<back&&  nums[front]==nums[front-1])
-                                front++;
-                             continue;
-                         }
+                    {
+                        returnVal.Add(new List<int> { nums[i], nums[front], nums[back] }.OrderBy(x => x).ToList());
+                        front++;
+
+                        while (front < back && nums[front] == nums[front - 1])
+                            front++;
+                        continue;
+                    }
                     if (Math.Abs(fb - target) < Math.Abs(sumClose - target))
                     {
                         sumClose = fb;
@@ -377,10 +377,10 @@ namespace Leet
             {
                 if (i > 0 && nums[i] == nums[i - 1])
                     continue;
-                var possibleSolns = Leet16.ThreeSumClosestPair(nums.Skip(i + 1).Take(nums.Length - i - 1).ToArray(),target-nums[i]);
+                var possibleSolns = Leet16.ThreeSumClosestPair(nums.Skip(i + 1).Take(nums.Length - i - 1).ToArray(), target - nums[i]);
                 foreach (var x in possibleSolns)
                 {
-                    x.Insert(0,nums[i]); 
+                    x.Insert(0, nums[i]);
                 }
                 returnVal.AddRange(possibleSolns);
             }
@@ -388,7 +388,8 @@ namespace Leet
         }
     }
 
-    public class Leet19 {
+    public class Leet19
+    {
         public class ListNode
         {
             public int val;
@@ -396,25 +397,43 @@ namespace Leet
             public ListNode(int x) { val = x; }
         }
         public static ListNode RemoveNthFromEnd(ListNode head, int n)
-        { 
+        {
             var rNode = new ListNode(0);
-            rNode.next= head;
+            rNode.next = head;
 
-            ListNode lastNode = head; 
-            int length =0;
-            while(lastNode != null){ 
-                length++;;
-                lastNode= lastNode.next;                
-            } 
-            length-=n;
-            lastNode=rNode;
-            while(length>0){
+            ListNode lastNode = head;
+            int length = 0;
+            while (lastNode != null)
+            {
+                length++; ;
+                lastNode = lastNode.next;
+            }
+            length -= n;
+            lastNode = rNode;
+            while (length > 0)
+            {
                 length--;
                 lastNode = lastNode.next;
             }
-            lastNode.next =lastNode.next.next;
+            lastNode.next = lastNode.next.next;
 
             return rNode.next;
+        }
+    }
+
+    public class Leet20
+    {
+        public static bool IsValid(string s)
+        {
+            List<char> splChars = new List<char>{'(',')','{','}','[',']'};
+            Dictionary<char,char> charCounterChar = new Dictionary<char, char>{{'(',')'},{'{','}'},{'[',']'}};
+            Stack<char> stack = new Stack<char>();
+            foreach(char c in s){
+                if(splChars.Contains(c)){
+                    stack.Push(c);
+                }
+            }
+            return false;
         }
     }
 }
