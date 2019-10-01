@@ -387,4 +387,34 @@ namespace Leet
             return returnVal;
         }
     }
+
+    public class Leet19 {
+        public class ListNode
+        {
+            public int val;
+            public ListNode next;
+            public ListNode(int x) { val = x; }
+        }
+        public static ListNode RemoveNthFromEnd(ListNode head, int n)
+        { 
+            var rNode = new ListNode(0);
+            rNode.next= head;
+
+            ListNode lastNode = head; 
+            int length =0;
+            while(lastNode != null){ 
+                length++;;
+                lastNode= lastNode.next;                
+            } 
+            length-=n;
+            lastNode=rNode;
+            while(length>0){
+                length--;
+                lastNode = lastNode.next;
+            }
+            lastNode.next =lastNode.next.next;
+
+            return rNode.next;
+        }
+    }
 }
