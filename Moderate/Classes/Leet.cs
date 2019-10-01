@@ -425,15 +425,20 @@ namespace Leet
     {
         public static bool IsValid(string s)
         {
-            List<char> splChars = new List<char>{'(',')','{','}','[',']'};
             Dictionary<char,char> charCounterChar = new Dictionary<char, char>{{'(',')'},{'{','}'},{'[',']'}};
             Stack<char> stack = new Stack<char>();
             foreach(char c in s){
-                if(splChars.Contains(c)){
+                    if(charCounterChar.ContainsKey(c)){
                     stack.Push(c);
-                }
+                    }
+                    else{
+                        if(!stack.Any())
+                        return false;
+                        if (charCounterChar[stack.Pop()] != c)
+                            return false;
+                    }
             }
-            return false;
+            return !stack.Any();
         }
     }
 }
