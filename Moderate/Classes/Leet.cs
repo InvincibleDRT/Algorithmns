@@ -68,7 +68,7 @@ namespace Leet
 
     public class Lett9
     {
-        public bool IsPalindrome(int x)
+        public static bool IsPalindrome(int x)
         {
             string y = x.ToString();
             int i = 0;
@@ -102,6 +102,42 @@ namespace Leet
         }
 
     }
+
+    public class Lett12
+    {
+        public static string IntToRoman(int num)
+        {
+
+            string[] M = { "", "M", "MM", "MMM" };
+            string[] C = { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
+            string[] X = { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
+            string[] I = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+            return M[num / 1000] + C[(num % 1000) / 100] + X[(num % 100) / 10] + I[num % 10];
+        }
+    }
+
+
+    public class Lee13
+    {
+        public static int RomanToInt(string num)
+        {
+            int tempSum = 0;
+            int prevValue = 0;
+            Dictionary<char, int> stringToIntDict = new Dictionary<char, int>() { { 'I', 1 }, { 'V', 5 }, { 'X', 10 }, { 'L', 50 }, { 'C', 100 }, { 'D', 500 }, { 'M', 1000 } }; //and so on.....
+            for (int i = num.Length - 1; i >= 00; i--)
+            {
+                int current = stringToIntDict[num[i]];
+                if (prevValue == 0)
+                    prevValue = current;
+                if (prevValue > current)
+                    tempSum -= current;
+                else tempSum += stringToIntDict[num[i]];
+                prevValue = current;
+            }
+            return tempSum;
+        }
+    }
+
 
     public class Leet14
     {
