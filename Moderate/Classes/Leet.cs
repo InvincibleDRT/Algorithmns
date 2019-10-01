@@ -270,6 +270,57 @@ namespace Leet
 
             return returnval;
         }
+
+        public static IList<IList<int>> ThreeSumClosestPair(int[] nums, int target)
+        {
+            Array.Sort(nums);
+            var returnVal = new List<IList<int>>();
+            if(nums.Length<3)
+            return returnVal;
+            int returnval = nums[1] + nums[2] + nums[0];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if(i >0 &&nums[i] == nums[i-1])
+                    continue;
+                int front = i + 1, back = nums.Length - 1;
+                int sumClose = nums[1] + nums[2] + nums[0];
+
+                while (front < back)
+                {
+                    var fb = nums[i] + nums[front] + nums[back];
+                    if (target == fb)
+                         {
+                             returnVal.Add(new List<int>{nums[i] , nums[front] , nums[back]}.OrderBy(x=>x).ToList());
+                             front++; 
+                             
+                             while(front<back&&  nums[front]==nums[front-1])
+                                front++;
+                             continue;
+                         }
+                    if (Math.Abs(fb - target) < Math.Abs(sumClose - target))
+                    {
+                        sumClose = fb;
+                        if (fb > target)
+                            back--;
+                        else
+                            front++;
+                    }
+                    else if (Math.Abs(fb - target) >= Math.Abs(sumClose - target))
+                    {
+
+                        if (fb > target)
+                            back--;
+                        else
+                            front++;
+
+                    }
+                }
+                returnval = Math.Abs(target - returnval) > Math.Abs(target - sumClose) ? sumClose : returnval;
+            }
+
+            return returnVal.Distinct().ToList();
+        }
+
     }
 
     public class Leet17
@@ -313,4 +364,27 @@ namespace Leet
         }
     }
 
+
+    public class Leet18
+    {
+        public static IList<IList<int>> FourSum(int[] nums, int target)
+        {
+            Array.Sort(nums);
+            var returnVal = new List<IList<int>>();
+            if (nums.Length < 4)
+                return returnVal;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (i > 0 && nums[i] == nums[i - 1])
+                    continue;
+                var possibleSolns = Leet16.ThreeSumClosestPair(nums.Skip(i + 1).Take(nums.Length - i - 1).ToArray(),target-nums[i]);
+                foreach (var x in possibleSolns)
+                {
+                    x.Insert(0,nums[i]); 
+                }
+                returnVal.AddRange(possibleSolns);
+            }
+            return returnVal;
+        }
+    }
 }
