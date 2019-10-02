@@ -390,12 +390,7 @@ namespace Leet
 
     public class Leet19
     {
-        public class ListNode
-        {
-            public int val;
-            public ListNode next;
-            public ListNode(int x) { val = x; }
-        }
+ 
         public static ListNode RemoveNthFromEnd(ListNode head, int n)
         {
             var rNode = new ListNode(0);
@@ -425,20 +420,76 @@ namespace Leet
     {
         public static bool IsValid(string s)
         {
-            Dictionary<char,char> charCounterChar = new Dictionary<char, char>{{'(',')'},{'{','}'},{'[',']'}};
+            Dictionary<char, char> charCounterChar = new Dictionary<char, char> { { '(', ')' }, { '{', '}' }, { '[', ']' } };
             Stack<char> stack = new Stack<char>();
-            foreach(char c in s){
-                    if(charCounterChar.ContainsKey(c)){
+            foreach (char c in s)
+            {
+                if (charCounterChar.ContainsKey(c))
+                {
                     stack.Push(c);
-                    }
-                    else{
-                        if(!stack.Any())
+                }
+                else
+                {
+                    if (!stack.Any())
                         return false;
-                        if (charCounterChar[stack.Pop()] != c)
-                            return false;
-                    }
+                    if (charCounterChar[stack.Pop()] != c)
+                        return false;
+                }
             }
             return !stack.Any();
         }
     }
+
+    public class Leet21
+    {
+
+        public static ListNode MergeTwoLists(ListNode l1, ListNode l2)
+        {
+            var returnList = new ListNode(0);
+            var dummy = new ListNode(0);
+            dummy.next= returnList;
+            while(l1 != null && l2!=null){ 
+                    if(l1.val > l2.val){
+                        returnList.next = new ListNode(l2.val);
+                        l2 = l2.next;
+                    }
+                    else{
+                        returnList.next = new ListNode(l1.val);
+                        l1 = l1.next;
+                    }
+                    returnList = returnList.next;
+            }
+            var x = l1 ==null?l2:l1;
+            while(x!=null){
+                returnList.next= new ListNode(x.val);
+                x= x.next;
+                returnList = returnList.next;
+            }
+            
+            return dummy.next.next;
+        }
+    }
+
+        public class ListNode
+        {
+            public int val;
+            public ListNode next;
+            public ListNode(int x) { val = x; }
+        }
+    public class Utilities {
+        public static ListNode ConstructListNode (int[] arr){
+            var dummy = new ListNode(0);
+            var rv = new ListNode(0);
+            dummy.next=rv;
+            foreach (int x in arr){
+                rv.next= new ListNode(x);
+                rv=rv.next;
+            }
+
+            return dummy.next.next;
+
+        }
+    }
+
+
 }
