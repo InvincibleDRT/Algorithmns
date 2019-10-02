@@ -16,6 +16,7 @@ namespace Moderate
             // NumberToString.ConvertToString();
             var combos= Leet20.IsValid("([]{})");
             var mergeList = Leet21.MergeTwoLists(Utilities.ConstructListNode(new int[]{1,2,4}),Utilities.ConstructListNode(new int[]{1,3,4}));
+            var swapList = Leet24.SwapPairs(Utilities.ConstructListNode(new int[]{1,2,3,4}));
             Console.Read();
 
         }

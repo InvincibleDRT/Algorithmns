@@ -474,9 +474,73 @@ namespace Leet
         }
     }
 
+    public class Leet23
+    {
+        public static ListNode MergeKLists(ListNode[] lists)
+        {
+            if (lists.Length == 0)
+                return null;
+            if (lists.Length == 1)
+                return lists[0];
+            var mergedNode = MergeTwoLists(lists[0], lists[1]);
+
+            for (int i = 2; i < lists.Length; i++)
+            {
+                mergedNode = MergeTwoLists(mergedNode, lists[i]);
+            }
+            return mergedNode;
+        }
+        public static ListNode MergeTwoLists(ListNode l1, ListNode l2)
+        {
+            var returnList = new ListNode(0);
+            var dummy = new ListNode(0);
+            dummy.next = returnList;
+            while (l1 != null && l2 != null)
+            {
+                if (l1.val > l2.val)
+                {
+                    returnList.next = new ListNode(l2.val);
+                    l2 = l2.next;
+                }
+                else
+                {
+                    returnList.next = new ListNode(l1.val);
+                    l1 = l1.next;
+                }
+                returnList = returnList.next;
+            }
+            var x = l1 == null ? l2 : l1;
+            while (x != null)
+            {
+                returnList.next = new ListNode(x.val);
+                x = x.next;
+                returnList = returnList.next;
+            }
+
+            return dummy.next.next;
+        }
+    }
 
 
-
+    public class Leet24
+    {
+        public static ListNode SwapPairs(ListNode head)
+        {
+            ListNode dummy = new ListNode(0);
+            dummy.next = head;
+            ListNode current = dummy;
+            while (current.next != null && current.next.next != null)
+            {
+                ListNode first = current.next;
+                ListNode second = current.next.next;
+                first.next = second.next;
+                current.next = second;
+                current.next.next = first;
+                current = current.next.next;
+            }
+            return dummy.next;
+        }
+    }
 
 
     #region  Utilities
