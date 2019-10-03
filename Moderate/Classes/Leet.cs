@@ -558,6 +558,22 @@ public class Leet26 {
     }
 }
 
+public class Leet27 {
+    public static int RemoveElement(int[] nums, int val) {
+        int j=0;
+        if(nums.Length==0)
+        return 0;
+        for(int i=0;i<nums.Length;i++){ 
+             if(nums[i]!=val){
+                nums[j]=nums[i];
+                j++;
+            }
+        } 
+        return j;
+    }
+}
+
+
     #region  Utilities
     public class ListNode
     {
