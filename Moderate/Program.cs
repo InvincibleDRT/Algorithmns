@@ -20,6 +20,7 @@ namespace Moderate
             var len = Leet26.RemoveDuplicates(new int[]{1,1,2});
             len = Leet27.RemoveElement(new int[]{1,1,2},1);
             len = Leet28.StrStr(haystack : "aaaaa", needle : "bba");
+            len = Leet29.Divide(-2147483648,3);
             Console.Read();
 
         }
