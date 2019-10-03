@@ -571,6 +571,29 @@ public class Leet27 {
         } 
         return j;
     }
+
+}
+
+  public class Leet28 {
+    public static int StrStr(string haystack, string needle) {
+        if(needle.Length==0)
+        return 0;
+        if(needle.Length> haystack.Length)
+        return -1;
+        if(needle.Length == haystack.Length)
+            return needle==haystack ?0:-1;
+        for(int i=0;i< haystack.Length;i++){
+            int j=0; 
+            if(haystack[i]==needle[j]){                
+                while(j<needle.Length&& i+j < haystack.Length && haystack[i+j]==needle[j]){
+                    j++;
+                }
+            if(j==needle.Length)
+                return i;
+            }
+        }
+        return -1;
+    }
 }
 
 
