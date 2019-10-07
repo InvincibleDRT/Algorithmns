@@ -543,75 +543,92 @@ namespace Leet
     }
 
 
-public class Leet26 {
-    public  static int RemoveDuplicates(int[] nums) { 
-        int j=1;
-        if(nums.Length==0)
-        return 0;
-        for(int i=0;i<nums.Length;i++){ 
-             if(nums[i]!=nums[j-1]){
-                nums[j]=nums[i];
-                j++;
-            }
-        } 
-        return j;
-    }
-}
-
-public class Leet27 {
-    public static int RemoveElement(int[] nums, int val) {
-        int j=0;
-        if(nums.Length==0)
-        return 0;
-        for(int i=0;i<nums.Length;i++){ 
-             if(nums[i]!=val){
-                nums[j]=nums[i];
-                j++;
-            }
-        } 
-        return j;
-    }
-
-}
-
-  public class Leet28 {
-    public static int StrStr(string haystack, string needle) {
-        if(needle.Length==0)
-        return 0;
-        if(needle.Length> haystack.Length)
-        return -1;
-        if(needle.Length == haystack.Length)
-            return needle==haystack ?0:-1;
-        for(int i=0;i< haystack.Length;i++){
-            int j=0; 
-            if(haystack[i]==needle[j]){                
-                while(j<needle.Length&& i+j < haystack.Length && haystack[i+j]==needle[j]){
+    public class Leet26
+    {
+        public static int RemoveDuplicates(int[] nums)
+        {
+            int j = 1;
+            if (nums.Length == 0)
+                return 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] != nums[j - 1])
+                {
+                    nums[j] = nums[i];
                     j++;
                 }
-            if(j==needle.Length)
-                return i;
             }
+            return j;
         }
-        return -1;
     }
-}
 
-public class Leet29 {
-    public static int Divide(int dividend, int divisor) {
-   if (divisor == 0) return int.MaxValue;
-    int sign = dividend > 0 ^ divisor > 0 ? -1 : 1;
-    long m = Math.Abs((long)dividend), n = Math.Abs((long)divisor), count = 0;
-    for (m -= n; m >= 0; m -= n){
-        count++;
-        if (m == 0) break;
-        for (int subCount = 1; m - (n << subCount) >= 0; subCount++){
-            m -= n << subCount;
-            count += (int)Math.Pow(2, subCount);
+    public class Leet27
+    {
+        public static int RemoveElement(int[] nums, int val)
+        {
+            int j = 0;
+            if (nums.Length == 0)
+                return 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] != val)
+                {
+                    nums[j] = nums[i];
+                    j++;
+                }
+            }
+            return j;
+        }
+
+    }
+
+    public class Leet28
+    {
+        public static int StrStr(string haystack, string needle)
+        {
+            if (needle.Length == 0)
+                return 0;
+            if (needle.Length > haystack.Length)
+                return -1;
+            if (needle.Length == haystack.Length)
+                return needle == haystack ? 0 : -1;
+            for (int i = 0; i < haystack.Length; i++)
+            {
+                int j = 0;
+                if (haystack[i] == needle[j])
+                {
+                    while (j < needle.Length && i + j < haystack.Length && haystack[i + j] == needle[j])
+                    {
+                        j++;
+                    }
+                    if (j == needle.Length)
+                        return i;
+                }
+            }
+            return -1;
         }
     }
-    return count*sign > int.MaxValue ? int.MaxValue : (int)count*sign;
+
+    public class Leet29
+    {
+        public static int Divide(int dividend, int divisor)
+        {
+            if (divisor == 0) return int.MaxValue;
+            int sign = dividend > 0 ^ divisor > 0 ? -1 : 1;
+            long m = Math.Abs((long)dividend), n = Math.Abs((long)divisor), count = 0;
+            for (m -= n; m >= 0; m -= n)
+            {
+                count++;
+                if (m == 0) break;
+                for (int subCount = 1; m - (n << subCount) >= 0; subCount++)
+                {
+                    m -= n << subCount;
+                    count += (int)Math.Pow(2, subCount);
+                }
+            }
+            return count * sign > int.MaxValue ? int.MaxValue : (int)count * sign;
+        }
     }
-}
 
 
     #region  Utilities
