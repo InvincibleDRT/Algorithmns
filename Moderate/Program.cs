@@ -21,6 +21,12 @@ namespace Moderate
             len = Leet27.RemoveElement(new int[]{1,1,2},1);
             len = Leet28.StrStr(haystack : "aaaaa", needle : "bba");
             len = Leet29.Divide(-2147483648,3);
+            var rv = Leet30.GetPermutations(new string[]{"foo","bar"});
+            rv =Leet30.GetPermutations(new string[]{"word","good","best","good"});
+            var intlist = Leet30.GetPositions("wordgoodgoodgoodbestword", new string[]{"word","good","best","good"});
+            intlist = Leet30.GetPositions("foobarfoobar", new string[]{"bar","foo"});
+            intlist = Leet30.GetPositions("", new string[]{});
+            
             Console.Read();
 
         }
