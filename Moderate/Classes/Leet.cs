@@ -666,8 +666,47 @@ namespace Leet
             }
         }
 
+
+    public static IList<int> GetPositions(string s,string[] words){
+        var rv =new List<int>();;
+        
+        if(string.IsNullOrEmpty(s))
+            return rv;
+        if(words.Length==0)
+        return rv;
+        foreach (string combostring in GetPermutations(words)){
+            int start =0;
+            while(start>=0){
+            var index = s.IndexOf(combostring,start);
+            if(index <0)
+            break;
+            if(!rv.Contains(index))
+                rv.Add(index);
+            start =index+1;
+
+            }
+
+        }
+        return rv;
+
     }
 
+    public static IList<string> GetPermutations(IEnumerable<string> words,IList<string> tempString=null, IList<string> returnSet= null){
+        if(returnSet==null || tempString ==null){
+            returnSet= new List<string>();
+            tempString = new List<string>();
+        }
+        if(words.Count()==0) returnSet.Add(tempString.Aggregate((x,y)=>x+y));
+        for(int i=0; i< words.Count();i++){
+            string[] tempSet = words.Where((val,idx)=> idx != i).ToArray();
+            tempString.Add(words.ElementAt(i));
+            GetPermutations(tempSet,tempString,returnSet);
+            tempSet= tempSet.Where((val,idx)=>idx != i).ToArray();
+            tempString.RemoveAt(tempString.Count-1);
+        }
+        return returnSet.ToArray();
+    }
+    }
 
     #region  Utilities
     public class ListNode
@@ -698,6 +737,18 @@ namespace Leet
         }
     }
 
+    public static class Extensions
+    {
+        public static T[] Filter<T>(this T[] array,int index ){
+            List<T> rv = new List<T>();
+            for(int i=0;i<array.Length;i++){
+                if(i==index)
+                    continue;
+                rv.Add(array[i]);
+            }
+            return rv.ToArray();
+        }
+    }
 
     #endregion
 
