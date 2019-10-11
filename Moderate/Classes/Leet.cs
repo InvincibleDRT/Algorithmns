@@ -631,6 +631,44 @@ namespace Leet
     }
 
 
+    public class Leet30
+    {
+        public static IList<int> FindSubstring(string s, string[] words)
+        {
+            List<int> rv = new List<int>();
+            HashSet<string> possibleSolns = new HashSet<string>();
+            var ps = GeneratePermutaions(words, 0);
+            foreach (string keys in ps)
+            {
+                var index = s.IndexOf(keys);
+                if (index < 0)
+                    continue;
+                rv.Add(index);
+            }
+            return rv;
+        }
+
+        public static IEnumerable<string> GeneratePermutaions(string[] words, int start)
+        {
+            if (start == words.Length - 1)
+            {
+                yield return words[start];
+            }
+            if(start==words.Length)
+                yield return words[0];
+            for (int i = start; i < words.Length; i++)
+            {
+
+                foreach (var str in GeneratePermutaions(words, start + 1))
+                {
+                    yield return $"{words[i]}{str}";
+                }
+            }
+        }
+
+    }
+
+
     #region  Utilities
     public class ListNode
     {

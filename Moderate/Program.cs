@@ -21,6 +21,8 @@ namespace Moderate
             len = Leet27.RemoveElement(new int[]{1,1,2},1);
             len = Leet28.StrStr(haystack : "aaaaa", needle : "bba");
             len = Leet29.Divide(-2147483648,3);
+            var searchList = Leet30.FindSubstring("barfoothefoobarman",new string[]{"foo","bar"});
+              searchList = Leet30.FindSubstring("wordgoodgoodgoodbestword",new string[]{"word","good","best","word"});
             Console.Read();
 
         }
