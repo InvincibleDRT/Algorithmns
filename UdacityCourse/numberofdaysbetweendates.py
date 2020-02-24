@@ -7,7 +7,6 @@ class Month:
         self.order = order
 
 
-
 class Date:
     def __init__(self, date, month, year):
         self.date = date
@@ -15,12 +14,13 @@ class Date:
         self.year = year
 
 
-def getMonth(months,name):
-    month = [m for m in months if m.name.lower()==name.lower()]
+def getMonth(months, name):
+    month = [m for m in months if m.name.lower() == name.lower()]
     return month[0]
 
-day1 = Date(1,'January',1999)
-day2 = Date(1,'February',2000)
+
+day1 = Date(1, 'January', 1999)
+day2 = Date(1, 'February', 2020)
 monthsObjects = []
 months = ['January', 'February', 'March', 'April', 'May', 'June',
           'July', 'August', 'September', 'October', 'November', 'December']
@@ -32,9 +32,26 @@ for item in zipped:
 
 month1 = getMonth(monthsObjects, day1.month)
 month2 = getMonth(monthsObjects, day2.month)
-numOfDays =0
-for i in range(month1.order,month2.order):
-    numOfDays += days[i-1]
+numOfDays = 0
 # if (day1.year %4 ==0 and month1.order<2) or (day2.year %4 ==0 and month2.order >2):
 #     numOfDays += 1
-print((day2.year - day1.year)*365  +  numOfDays + day2.date-day1.date)
+numOfDays += day2.date
+numOfDays -= day1.date
+for year in range(day1.year + 1, day2.year):
+    numOfDays += 365
+    if year % 4 == 0:
+        numOfDays += 1
+def calculateDaysTillYearEnd(m1,m2):
+    index = m1-1
+    nd=0
+    while(index <12 and index < m2):
+        print(index)
+        nd += days[index]
+        index += 1
+    return nd
+m2 =month2.order
+if(month1.order < month2.order):
+    m2=12
+numOfDays += calculateDaysTillYearEnd(month1.order ,m2)
+numOfDays += calculateDaysTillYearEnd(1,month2.order-1)
+print(numOfDays)
