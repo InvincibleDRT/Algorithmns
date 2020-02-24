@@ -43,3 +43,41 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
+def getPrefix(number):
+  if number[0]=="(":
+    return number[number.index('(')+1 :number.index(')')]
+  if " " in number:
+    return number[:3]
+  if number[:2] =="140":
+    return "140"
+
+def isFixedLine(number):
+  return number[0]=="("
+
+def getPrefixByData(data,numbers):
+  totalFixedCallMade=0
+  totalFixedCallsToFixedCalls=0
+  for i in data:
+    n1 =getPrefix(i[0])
+    if isFixedLine(i[0]) and isFixedLine(i[1]):
+      totalFixedCallMade +=1
+      totalFixedCallsToFixedCalls +=1
+    elif isFixedLine(i[0]):
+      totalFixedCallMade+=1
+
+    n2 =getPrefix(i[1])
+
+    if n1 != None:
+      numbers.append(n1)
+    if n2 != None:
+      numbers.append(n2)
+  return totalFixedCallMade,totalFixedCallsToFixedCalls
+
+numbers =[]
+a,b= getPrefixByData(calls,numbers)
+x,y =getPrefixByData(texts,numbers)
+
+print("The numbers called by people in Bangalore have codes:" )
+print(sorted(list(set(numbers))))
+
+print(str(round(float(a+x)/(b+y),2))+ " percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")

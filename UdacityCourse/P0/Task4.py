@@ -25,3 +25,19 @@ Print a message:
 The list of numbers should be print out one per line in lexicographic order with no duplicates.
 """
 
+sendnumbers =[]
+checknums =[]
+for i in texts:
+    checknums.append(i[0])
+    checknums.append(i[1])
+for i in calls:
+    sendnumbers.append(i[0])
+    checknums.append(i[1])
+
+posTeleMarkets=[]
+for i in sendnumbers:
+    if i not in checknums:
+        posTeleMarkets.append(i)
+
+print("These numbers could be telemarketers: ")
+print(sorted(list(set(posTeleMarkets))))

@@ -1,0 +1,25 @@
+Task0
+
+O[1] for both space and time since we are accessing a constant element at a particular index
+
+Task1
+
+O[n] for both space and time. we have two loops each with len of calls and texts. if the length of calls is x and length of text is y then complexity will be O(x+y+k) or simply O(n). for space, we have an expanding list throughout of strings
+
+
+Task2
+
+O[n] for time and O[1] for space
+for time, we are looping through entire list and we have 2 operations in each cycle at worst. hence O(2*n) or simply O(n)
+we only use one variable to store the call at any given point
+
+
+Task3
+O(nlogn) for the sorted command. otherwise we would have O(n+k) as time complexity
+O(4*n+32) we store 8 ints at any given point of time. assuming 4bytes for each. simply O(n)
+
+
+Task4
+
+O(nlogn) for time that is being used to sort. even though the resulting list will be small, since we are dealing with worst cases it will still be O(nlogn)
+O(n) for space as we use 3 expanding list at any time
