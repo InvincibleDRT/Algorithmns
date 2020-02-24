@@ -1,6 +1,9 @@
 ﻿using Moderate.Classes;
 using System;
 using Leet;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Moderate
 {
     class Program
@@ -29,8 +32,48 @@ namespace Moderate
             intlist = Leet30.GetPositions("foobarfoobar", new string[]{"bar","foo"});
             intlist = Leet30.GetPositions("", new string[]{});
             
+            Dictionary<string,double> vartestdict = new Dictionary<string, double>(){
+                {"1",69.5},
+                {"2",29.501},
+                {"3",0.999}
+            };
+            var result= PerformRoundOff(vartestdict);
             Console.Read();
+        }
 
+        
+        public static Dictionary<string,double> PerformRoundOff(Dictionary<string,double> performanceLevels)
+        {
+            var total = performanceLevels.Values.Sum();
+            var returnDict = new Dictionary<string, double>();
+            var floorDict = new Dictionary<string, double>();
+            foreach (var kvp in performanceLevels)
+            {
+                var val = (kvp.Value * 100.0) / total;
+
+                returnDict.Add(kvp.Key, val);
+            }
+
+            Dictionary<string, double> mantissaLookup = new Dictionary<string, double>();
+            foreach (var item in returnDict)
+            {
+                var integralPart = Math.Truncate(item.Value);
+                integralPart= integralPart ==0 && item.Value > 0 ? integralPart+1 : integralPart;
+                floorDict.Add(item.Key, integralPart);
+                mantissaLookup.Add(item.Key, item.Value - integralPart);
+            }
+            double offset = 100.0 - floorDict.Values.Sum();
+            foreach (var item in mantissaLookup.OrderByDescending(x => x.Value).ThenByDescending(x => x.Key))
+            {
+                if (offset > 0.0)
+                {
+                    floorDict[item.Key] = floorDict[item.Key] + 1;
+                }
+                else
+                    break;
+                offset--;
+            }
+            return floorDict;
         }
 
 
