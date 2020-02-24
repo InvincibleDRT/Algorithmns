@@ -1,68 +1,70 @@
+# Udacity
 
 
-class Month:
-    def __init__(self, name, days, order):
-        self.name = name
-        self.days = days
-        self.order = order
+def isLeapYear(year):
+    if year % 400 == 0:
+        return True
+    if year % 100 == 0:
+        return False
+    return year % 4 == 0
 
 
-class Date:
-    def __init__(self, date, month, year):
-        self.date = date
-        self.month = month
-        self.year = year
+def nextDay(year, month, day):
+    """Simple version: assume every month has 30 days"""
+    if day < daysInMonth(year, month):
+        return year, month, day + 1
+    else:
+        if month == 12:
+            return year + 1, 1, 1
+        else:
+            return year, month + 1, 1
 
 
-def getMonth(months, name):
-    month = [m for m in months if m.name.lower() == name.lower()]
-    return month[0]
+def dateIsBefore(year1, month1, day1, year2, month2, day2):
+    """Returns True if year1-month1-day1 is before year2-month2-day2. Otherwise, returns False."""
+    if year1 < year2:
+        return True
+    if year1 == year2:
+        if month1 < month2:
+            return True
+        if month1 == month2:
+            return day1 < day2
+    return False
 
 
-day1 = Date(1, 'January', 1999)
-day2 = Date(1, 'February', 2020)
+def daysInMonth(y, m):
+    daysLU = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    if(m == 2 and isLeapYear(y)):
+        return daysLU[m-1]+1
+    return daysLU[m-1]
 
 
-def daysBetweenDates(day1, day2):
-    monthsObjects = []
-    months = ['January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December']
-    orders = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    zipped = zip(months, days, orders)
-    for item in zipped:
-        monthsObjects.append(Month(*item))
-
-    month1 = getMonth(monthsObjects, day1.month)
-    month2 = getMonth(monthsObjects, day2.month)
-    numOfDays = 0
-    # if (day1.year %4 ==0 and month1.order<2) or (day2.year %4 ==0 and month2.order >2):
-    #     numOfDays += 1
-    numOfDays += day2.date
-    numOfDays -= day1.date
-    for year in range(day1.year + 1, day2.year):
-        numOfDays += 365
-        if year % 4 == 0:
-            numOfDays += 1
+def daysBetweenDates(year1, month1, day1, year2, month2, day2):
+    """Returns the number of days between year1/month1/day1
+       and year2/month2/day2. Assumes inputs are valid dates
+       in Gregorian calendar."""
+    # program defensively! Add an assertion if the input is not valid!
+    assert not dateIsBefore(year2, month2, day2, year1, month1, day1)
+    days = 0
+    while dateIsBefore(year1, month1, day1, year2, month2, day2):
+        year1, month1, day1 = nextDay(year1, month1, day1)
+        days += 1
+    return days
 
 
-    def calculateDaysTillYearEnd(m1, m2):
-        index = m1-1
-        nd = 0
-        while(index < 12 and index < m2):
-            print(index)
-            nd += days[index]
-            index += 1
-        return nd
+def test():
+    test_cases = [((2012, 1, 1, 2012, 2, 28), 58),
+                  ((2012, 1, 1, 2012, 3, 1), 60),
+                  ((2011, 6, 30, 2012, 6, 30), 366),
+                  ((2011, 1, 1, 2012, 8, 8), 585),
+                  ((1900, 1, 1, 1999, 12, 31), 36523)]
+
+    for (args, answer) in test_cases:
+        result = daysBetweenDates(*args)
+        if result != answer:
+            print ("Test with data:", args, "failed")
+        else:
+            print ("Test case passed!")
 
 
-    m2 = month2.order
-    if(month1.order < month2.order):
-        m2 = 12
-    numOfDays += calculateDaysTillYearEnd(month1.order, m2)
-    numOfDays += calculateDaysTillYearEnd(1, month2.order-1)
-    print(numOfDays)
-    return numOfDays
-
-
-numofDays = daysBetweenDates(day1,day2)
+test()
