@@ -26,4 +26,4 @@ for i in texts:
     numbers.append(i[0])
     numbers.append(i[1])
 
-print("There are "+len(set(numbers))+" different telephone numbers in the records." )
+print("There are "+str(len(set(numbers)))+" different telephone numbers in the records." )
