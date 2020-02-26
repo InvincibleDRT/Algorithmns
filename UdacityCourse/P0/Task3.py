@@ -52,29 +52,29 @@ def getPrefix(number):
     return "140"
 
 def isFixedLine(number):
-  return number[0]=="("
+  return number[:5]=="(080)"
 
 def getPrefixByData(data,numbers):
   totalFixedCallMade=0
   totalFixedCallsToFixedCalls=0
   for i in data:
-    n1 =getPrefix(i[0])
+    sourceNumber =getPrefix(i[0])
     if isFixedLine(i[0]):
       if isFixedLine(i[1]):
         totalFixedCallMade +=1
         totalFixedCallsToFixedCalls +=1
       else:
         totalFixedCallMade +=1
-      n2 =getPrefix(i[1])
-      numbers.append(n2)
+      destinationNumber =getPrefix(i[1])
+      numbers.append(destinationNumber)
   return totalFixedCallMade,totalFixedCallsToFixedCalls
 
 numbers =[]
-a,b= getPrefixByData(calls,numbers)
-x,y =getPrefixByData(texts,numbers)
+totalFixedCallMade1,totalFixedCallsToFixedCalls1= getPrefixByData(calls,numbers)
+totalFixedCallMade2,totalFixedCallsToFixedCalls2 =getPrefixByData(texts,numbers)
 
 print("The numbers called by people in Bangalore have codes:" )
 for i in set(numbers):
   print(i)
 
-print(str(round(float(b+y)*100/(a+x),2))+ " percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")
+print(str(round(float(totalFixedCallsToFixedCalls1+totalFixedCallsToFixedCalls2)*100/(totalFixedCallMade1+totalFixedCallMade2),2))+ " percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")
