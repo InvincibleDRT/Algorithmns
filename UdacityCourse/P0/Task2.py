@@ -19,9 +19,13 @@ Print a message:
 "<telephone number> spent the longest time, <total time> seconds, on the phone during 
 September 2016.".
 """
-mostSpendCall =[]
+timeSpent ={}
 for i in calls:
-    if len(mostSpendCall)==0 or  int(i[3]) > int(mostSpendCall[3]):
-        mostSpendCall =i
-
-print(mostSpendCall[0] + " spent the longest time, "+mostSpendCall[3]+" seconds, on the phone during September 2016.")
+    if timeSpent.get(i[0])==None:
+        timeSpent[i[0]] = 0
+    timeSpent[i[0]] += int(i[3])
+    if timeSpent.get(i[1])==None:
+        timeSpent[i[1]] = 0
+    timeSpent[i[1]] += int(i[3])
+maxPhone = max(timeSpent,key=timeSpent.get)    
+print(maxPhone + " spent the longest time, "+str(timeSpent[maxPhone])+" seconds, on the phone during September 2016.")
